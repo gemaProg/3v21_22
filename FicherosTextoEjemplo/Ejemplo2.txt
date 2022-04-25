@@ -1,0 +1,4 @@
+casa
+arbol
+perro
+gato
