@@ -5,10 +5,13 @@
  */
 package ficherostextoejemplo;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -21,7 +24,7 @@ import java.util.logging.Logger;
  */
 public class Ficheros {
     public static final String nombreFichero = "Carlota.txt";
-    
+    //Ficheros de Texto
     public static int contadorLineas() {
         int contadorLineas = 0;
         try {
@@ -76,6 +79,32 @@ public class Ficheros {
         return lineasFichero;
     }
 
+    public static ArrayList<String> leerFicheroArrayListBR() {
+        ArrayList<String> lineasFichero = new ArrayList();
+       
+        try {
+            BufferedReader bf = new BufferedReader(new FileReader(new File(nombreFichero)));
+            String cadena = null;
+            /*do{
+                cadena = bf.readLine();
+                if (cadena!=null)
+                    lineasFichero.add(cadena);
+            }while(cadena!=null);*/
+            
+            while((cadena=bf.readLine())!=null){
+                lineasFichero.add(cadena);
+            }
+            
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(Ficheros.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(Ficheros.class.getName()).log(Level.SEVERE, null, ex);
+        }
+           
+
+       
+        return lineasFichero;
+    }
     public static void listarLineas(ArrayList<String> lineasFichero) {
         for (int i = 0; i < lineasFichero.size(); i++) {
             System.out.println(lineasFichero.get(i));
@@ -104,4 +133,6 @@ public class Ficheros {
         }
     
     }
+    //Ficheros Binarios
+    
 }
