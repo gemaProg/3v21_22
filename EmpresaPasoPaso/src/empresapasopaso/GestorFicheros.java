@@ -53,7 +53,7 @@ public class GestorFicheros {
             for (int i = 0; i < lista.length; i++) {
                 if (lista[i]!= null)
                     //pw.println(lista[i]);
-                    pw.println(lista[i].toStringFichero());
+                    pw.println(lista[i].toString());
             }
             pw.close();
         } catch (IOException ex) {
@@ -92,8 +92,10 @@ public class GestorFicheros {
                 cadena = lf.nextLine();
                 String trozos [] = cadena.split(";");
                 System.out.println(cadena);
+                
                 //if ()-> prog else jp
-                //lista[i]=new 
+//(boolean experienciaPOO, StringBuilder lenguajes, String nombre, String departamento, Fecha fecha, double sueldoBase) {                
+//lista[i]=new 
                 i++;
             }
             
