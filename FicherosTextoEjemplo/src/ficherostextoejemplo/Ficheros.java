@@ -46,6 +46,7 @@ public class Ficheros {
         String[] lineasFichero = new String[contadorLineas()];
         try {
             Scanner lector = new Scanner(new File(nombreFichero));
+            lector.useDelimiter(";");
             /*int i=0;
             while (lector.hasNextLine()) {
                 lineasFichero[i]=lector.nextLine();
@@ -68,7 +69,8 @@ public class Ficheros {
         try {
             Scanner lector = new Scanner(new File(nombreFichero));
             while (lector.hasNextLine()) {
-                lineasFichero.add(lector.nextLine());
+                String linea = lector.nextLine();
+                lineasFichero.add(linea);
             }
 
             lector.close();
@@ -83,6 +85,7 @@ public class Ficheros {
         ArrayList<String> lineasFichero = new ArrayList();
        
         try {
+            
             BufferedReader bf = new BufferedReader(new FileReader(new File(nombreFichero)));
             String cadena = null;
             /*do{
@@ -94,7 +97,7 @@ public class Ficheros {
             while((cadena=bf.readLine())!=null){
                 lineasFichero.add(cadena);
             }
-            
+            bf.close();
         } catch (FileNotFoundException ex) {
             Logger.getLogger(Ficheros.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
@@ -127,12 +130,25 @@ public class Ficheros {
             pw.close();
 
         } catch (FileNotFoundException ex) {
-            System.out.println("Fichero no encontrado");
+            Logger.getLogger(Ficheros.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
-            System.out.println("Error de entrada-salida"+ex.getMessage());
-        }
-    
+            Logger.getLogger(Ficheros.class.getName()).log(Level.SEVERE, null, ex);
+        }  
     }
-    //Ficheros Binarios
-    
-}
+   
+    public static void escribirFichero(ArrayList<String> lineasFichero){
+           try {
+            PrintWriter pw = new PrintWriter(new FileWriter(new File(nombreFichero),true));
+            for (int i = 0; i < lineasFichero.size(); i++) {
+                pw.println(lineasFichero.get(i));
+            }
+            pw.close();
+
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(Ficheros.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(Ficheros.class.getName()).log(Level.SEVERE, null, ex);
+        }  
+    }
+    }
+
