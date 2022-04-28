@@ -26,7 +26,7 @@ public class Tester {
         empresa.listarTrabajadores();
         GestorFicheros.escribirFicheroPW(GestorFicheros.FICHERO_TRABAJADORES, empresa.trabajadores);
         System.out.println("-------------------------------------");
-       /* GestorFicheros.leerFicheroEscaner(GestorFicheros.FICHERO_TRABAJADORES);
+        GestorFicheros.leerFicheroEscaner(GestorFicheros.FICHERO_TRABAJADORES);
         
         GestorFicheros.escribirFicheroBinario(GestorFicheros.FICHERO_BINARIO_TRABAJADORES, empresa.trabajadores);
         System.out.println("-------------------------------------");
@@ -34,7 +34,7 @@ public class Tester {
         Trabajador [] grupo=GestorFicheros.leerFicheroBinario(GestorFicheros.FICHERO_BINARIO_TRABAJADORES);
         System.out.println(Arrays.toString(grupo));
         System.out.println(grupo.length);
-        
+        /*
         
         GestorFicheros.escribirFicheroBinarioUnoPorUno(GestorFicheros.FICHERO_BINARIO_TRABAJADORES, empresa.trabajadores);
         System.out.println("-------------------------------------");

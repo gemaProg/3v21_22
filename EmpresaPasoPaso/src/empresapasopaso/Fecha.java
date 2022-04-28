@@ -17,9 +17,7 @@ public class Fecha implements Serializable{
     protected int anyo;
     
     public Fecha() { 
-        dia = (int) ((Math.random() * 30) + 1);
-        mes = (int) ((Math.random() * 12) + 1);
-        anyo = (int) ((Math.random() * 100) + 1950);
+       this( (int) ((Math.random() * 30) + 1),(int) ((Math.random() * 12) + 1),(int) ((Math.random() * 100) + 1950));
     }
     
     public Fecha(int dia, int mes, int anyo) {
@@ -28,6 +26,15 @@ public class Fecha implements Serializable{
         this.anyo = anyo;
     }
 
+    public Fecha (String fecha){
+        /*String trozos[]= fecha.split("/");
+         this.dia = Integer.parseInt(trozos[0]);
+        this.mes =  Integer.parseInt(trozos[1]);
+        this.anyo =  Integer.parseInt(trozos[2]);
+        */
+        this(Integer.parseInt(fecha.split("/")[0]),Integer.parseInt(fecha.split("/")[1]),Integer.parseInt(fecha.split("/")[2]));
+        
+    }
     public int getDia() {
         return dia;
     }

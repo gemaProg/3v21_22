@@ -11,6 +11,7 @@ import java.io.PrintWriter;
 import java.util.Scanner;
 import java.io.FileReader;
 import java.io.BufferedReader;
+import java.io.DataOutputStream;
 import java.io.EOFException;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -53,7 +54,7 @@ public class GestorFicheros {
             for (int i = 0; i < lista.length; i++) {
                 if (lista[i]!= null)
                     //pw.println(lista[i]);
-                    pw.println(lista[i].toString());
+                    pw.println(lista[i].toStringFichero());
             }
             pw.close();
         } catch (IOException ex) {
@@ -91,10 +92,13 @@ public class GestorFicheros {
             while (lf.hasNextLine()) {
                 cadena = lf.nextLine();
                 String trozos [] = cadena.split(";");
-                System.out.println(cadena);
-                
-                //if ()-> prog else jp
-//(boolean experienciaPOO, StringBuilder lenguajes, String nombre, String departamento, Fecha fecha, double sueldoBase) {                
+                if (trozos[0].equalsIgnoreCase("PROGRAMADOR"))
+                    lista[i] = new Programador(Boolean.parseBoolean(trozos[6]),trozos[2],new StringBuilder(trozos[7]),trozos[1],trozos[3],new Fecha(trozos[4]),Double.parseDouble(trozos[5]));
+                else{
+                    //jefe proyecto
+                }
+                System.out.println(lista[i]);
+//boolean experienciaPOO, String NIF, StringBuilder lenguajes, String nombre, String departamento, Fecha fecha, double sueldoBase) 
 //lista[i]=new 
                 i++;
             }
@@ -110,6 +114,11 @@ public class GestorFicheros {
     try{
         ObjectOutputStream os = new ObjectOutputStream(new FileOutputStream(fichero));
         os.writeObject(lista);
+        /*DataOutputStream ds = new DataOutputStream(new FileOutputStream(fichero));
+        ds.writeUTF(lista[0].nombre);
+        ds.writeUTF(lista[0].departamento);
+        ds.writeDouble(lista[0].sueldoBase);
+        */
         os.close();
     }catch(IOException e){
         System.out.println(e.getMessage());
