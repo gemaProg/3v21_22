@@ -11,7 +11,6 @@ import java.io.PrintWriter;
 import java.util.Scanner;
 import java.io.FileReader;
 import java.io.BufferedReader;
-import java.io.DataOutputStream;
 import java.io.EOFException;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -28,14 +27,13 @@ import java.util.logging.Logger;
  */
 public class GestorFicheros {
 
-    
     public static final String FICHERO_TRABAJADORES = "Trabajadores";
 
     public static final String FICHERO_BINARIO_TRABAJADORES = "TrabajadoresBinario";
-    
+
     public static void crearFicheros() {
         File f = new File(FICHERO_TRABAJADORES);
-        File f2 = new File (FICHERO_BINARIO_TRABAJADORES);
+        File f2 = new File(FICHERO_BINARIO_TRABAJADORES);
         try {
             if (!f.exists()) {
                 f.createNewFile();
@@ -47,22 +45,25 @@ public class GestorFicheros {
             System.out.println(e.getMessage());
         }
     }
+
     public static void escribirFicheroPW(String fichero, Trabajador[] lista) {
         Scanner lector = new Scanner(System.in);
         try {
             PrintWriter pw = new PrintWriter(fichero);
             for (int i = 0; i < lista.length; i++) {
-                if (lista[i]!= null)
-                    //pw.println(lista[i]);
+                if (lista[i] != null) //pw.println(lista[i]);
+                {
                     pw.println(lista[i].toStringFichero());
+                }
             }
             pw.close();
         } catch (IOException ex) {
             Logger.getLogger(GestorFicheros.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    public static int lineasFichero(String fichero){
-      int cont=0;
+
+    public static int lineasFichero(String fichero) {
+        int cont = 0;
         try {
             BufferedReader bf = new BufferedReader(new FileReader(new File(fichero)));
             String cadena;
@@ -81,20 +82,21 @@ public class GestorFicheros {
         }
         return cont;
     }
+
     public static Trabajador[] leerFicheroEscaner(String fichero) {
         System.out.println("leyedo fichero....");
-        Trabajador []lista= new Trabajador[GestorFicheros.lineasFichero(fichero)];
-        int i=0;
+        Trabajador[] lista = new Trabajador[GestorFicheros.lineasFichero(fichero)];
+        int i = 0;
         try {
             Scanner lf = new Scanner(new File(fichero)/*,"ISO-8859-1"*/);
             String cadena;
-            
+
             while (lf.hasNextLine()) {
                 cadena = lf.nextLine();
-                String trozos [] = cadena.split(";");
-                if (trozos[0].equalsIgnoreCase("PROGRAMADOR"))
-                    lista[i] = new Programador(Boolean.parseBoolean(trozos[6]),trozos[2],new StringBuilder(trozos[7]),trozos[1],trozos[3],new Fecha(trozos[4]),Double.parseDouble(trozos[5]));
-                else{
+                String trozos[] = cadena.split(";");
+                if (trozos[0].equalsIgnoreCase("PROGRAMADOR")) {
+                    lista[i] = new Programador(Boolean.parseBoolean(trozos[6]), trozos[2], new StringBuilder(trozos[7]), trozos[1], trozos[3], new Fecha(trozos[4]), Double.parseDouble(trozos[5]));
+                } else {
                     //jefe proyecto
                 }
                 System.out.println(lista[i]);
@@ -102,7 +104,7 @@ public class GestorFicheros {
 //lista[i]=new 
                 i++;
             }
-            
+
             lf.close();
         } catch (FileNotFoundException ex) {
             System.out.println("Fichero no encontrado" + ex.getMessage());
@@ -110,65 +112,73 @@ public class GestorFicheros {
         return lista;
     }
 //Escribir y Leer Ficheros Binario, el array completo de una vez
-    public static void escribirFicheroBinario (String fichero, Trabajador[] lista){
-    try{
-        ObjectOutputStream os = new ObjectOutputStream(new FileOutputStream(fichero));
-        os.writeObject(lista);
-        /*DataOutputStream ds = new DataOutputStream(new FileOutputStream(fichero));
+
+    public static void escribirFicheroBinario(String fichero, Trabajador[] lista) {
+        try {
+            ObjectOutputStream os = new ObjectOutputStream(new FileOutputStream(fichero));
+            os.writeObject(lista);
+            /*DataOutputStream ds = new DataOutputStream(new FileOutputStream(fichero));
         ds.writeUTF(lista[0].nombre);
         ds.writeUTF(lista[0].departamento);
         ds.writeDouble(lista[0].sueldoBase);
-        */
-        os.close();
-    }catch(IOException e){
-        System.out.println(e.getMessage());
+             */
+            os.close();
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
     }
+
+    public static Trabajador[] leerFicheroBinario(String fichero) {
+        Trabajador[] lista = null;
+        try {
+            ObjectInputStream os = new ObjectInputStream(new FileInputStream(fichero));
+            lista = (Trabajador[]) os.readObject();
+            os.close();
+        } catch (ClassNotFoundException e) {
+            System.out.println(e.getMessage() + "Clase Trabajador [] no encontrada");
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+        return lista;
     }
-    public static Trabajador[] leerFicheroBinario (String fichero){
-    Trabajador []lista= null;
-    try{
-        ObjectInputStream os = new ObjectInputStream(new FileInputStream(fichero));
-        lista= (Trabajador[])os.readObject();
-        os.close();
-    }catch (ClassNotFoundException e){
-        System.out.println(e.getMessage()+"Clase Trabajador [] no encontrada");
-    }catch(IOException e){
-        System.out.println(e.getMessage());
-    }
-    return lista;
-} 
 //Escribir y Leer Ficheros Binario, elemento por elemento
-    public static void escribirFicheroBinarioUnoPorUno (String fichero, Trabajador[] lista){
-    try{
-        ObjectOutputStream os = new ObjectOutputStream(new FileOutputStream(fichero));
-        for (int i = 0; i < lista.length; i++) {
-           if (lista[i]!= null)
-                os.writeObject(lista[i]);   
-       }
-        
-        os.close();
-    }catch(IOException e){
-        System.out.println(e.getMessage());
+
+    public static void escribirFicheroBinarioUnoPorUno(String fichero, Trabajador[] lista) {
+        try {
+            ObjectOutputStream os = new ObjectOutputStream(new FileOutputStream(fichero));
+            for (int i = 0; i < lista.length; i++) {
+                if (lista[i] != null) {
+                    os.writeObject(lista[i]);
+                }
+            }
+
+            os.close();
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
     }
+
+    public static Trabajador[] leerFicheroBinarioUnoPorUno(String fichero) {
+        Trabajador[] lista = new Trabajador[10];
+        boolean EOF = false;
+        int i = 0;
+        try {
+            ObjectInputStream os = new ObjectInputStream(new FileInputStream(fichero));
+            while (!EOF) {
+                try {
+                    lista[i] = (Trabajador) os.readObject();
+                    i++;
+                } catch (EOFException e) {
+                    EOF = true;
+                    System.out.println("Ha alcanzado el final del fichero");
+                }
+            }
+        } catch (ClassNotFoundException e) {
+            System.out.println(e.getMessage() + "Clase Trabajador [] no encontrada");
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+        return lista;
     }
-    public static Trabajador[] leerFicheroBinarioUnoPorUno (String fichero){
-    Trabajador []lista= new Trabajador[10];
-    boolean EOF =false;
-    int i=0;
-    try{
-        ObjectInputStream os = new ObjectInputStream(new FileInputStream(fichero));
-        while (!EOF){
-            lista[i]= (Trabajador)os.readObject();
-            i++;
-        }os.close();
-    }catch (EOFException e){
-        EOF = true;
-    }catch (ClassNotFoundException e){
-        System.out.println(e.getMessage()+"Clase Trabajador [] no encontrada");
-    }catch(IOException e){
-        System.out.println(e.getMessage());
-    }
-    return lista;
-} 
-    
+
 }
