@@ -48,4 +48,6 @@ public class JefeProyecto extends Trabajador {
     public String toStringFichero(){
         return super.toStringFichero()+";"+this.personas;
     }
+
+   
 }

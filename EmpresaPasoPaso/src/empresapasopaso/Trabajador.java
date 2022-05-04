@@ -11,7 +11,7 @@ import java.io.Serializable;
  *
  * @author GEMA
  */
-public abstract class Trabajador implements Serializable{
+public abstract class Trabajador implements Serializable,Comparable<Trabajador>{
     protected String nombre;
     protected String NIF;
     protected static int contNIF;
@@ -105,5 +105,9 @@ public abstract class Trabajador implements Serializable{
     }
     public String toStringFichero(){
         return getClass().getSimpleName()+";" + nombre + ";" + NIF + ";"+ departamento + ";" + fecha.convertidorFormato() + ";" + sueldoBase;
+    }
+     @Override
+    public int compareTo(Trabajador arg0) {
+       return this.NIF.compareTo(arg0.NIF);
     }
 }
