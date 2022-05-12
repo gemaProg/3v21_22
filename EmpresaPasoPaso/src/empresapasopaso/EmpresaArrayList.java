@@ -7,7 +7,9 @@ package empresapasopaso;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Scanner;
 
 /**
@@ -16,52 +18,39 @@ import java.util.Scanner;
  */
 public class EmpresaArrayList {
 
-    protected Trabajador[] trabajadores;
+    protected ArrayList<Trabajador> trabajadores;
 
     public EmpresaArrayList() {
-        //this(12);
-        trabajadores = new Trabajador[12];
-        for (int i = 2; i < trabajadores.length; i++) {
+       
+        trabajadores = new ArrayList();
+        for (int i = 2; i < 12; i++) {
 
-            if (i < trabajadores.length / 2 + 2) {
-                trabajadores[i] = new Programador();
+            if (i < 6) {
+                trabajadores.add(new Programador());
             } else {
-                trabajadores[i] = new JefeProyecto();
+                trabajadores.add(new JefeProyecto());
             }
         }
 
     }
 
-    public EmpresaArrayList(int tamanyo) {
-        trabajadores = new Trabajador[tamanyo];
-        for (int i = 2; i < trabajadores.length; i++) {
-
-            if (i < trabajadores.length / 2 + 2) {
-                StringBuilder sb = new StringBuilder("JAVA:PHYTON");
-                trabajadores[i] = new Programador(true, sb, "TESTER", "IT"+i, new Fecha(), Math.random() * 501 + 1000);
-            } else {
-                trabajadores[i] = new JefeProyecto(i * 5, "TESTER_JEFE", "dpto", new Fecha(),Math.random() * 501 + 1500 );
-            }
-        }
-    }
-
-    public EmpresaArrayList(Trabajador[] trabajadores) {
+    public EmpresaArrayList(ArrayList<Trabajador> trabajadores) {
         this.trabajadores = trabajadores;
     }
 
-    public Trabajador[] getTrabajadores() {
+    public ArrayList<Trabajador> getTrabajadores() {
         return trabajadores;
     }
 
-    public void setTrabajadores(Trabajador[] trabajadores) {
+    public void setTrabajadores(ArrayList<Trabajador> trabajadores) {
         this.trabajadores = trabajadores;
     }
 
     public void listarTrabajadores() {
-        for (int i = 0; i < trabajadores.length; i++) {
-            if (trabajadores[i] != null) {
-                System.out.println(trabajadores[i]);
-            }
+        for (int i = 0; i < trabajadores.size(); i++) {
+
+            System.out.println(trabajadores.get(i));
+
             // System.out.println(Arrays.toString(trabajadores));
         }
 
@@ -121,13 +110,7 @@ public class EmpresaArrayList {
     }
 
     public void insertarEmpresa(Trabajador trabajador) {
-        boolean introducido = false;
-        for (int i = 0; i < trabajadores.length && introducido == false; i++) {
-            if (trabajadores[i] == null) {
-                trabajadores[i] = trabajador;
-                introducido = true;
-            }
-        }
+        boolean introducido = trabajadores.add(trabajador);
         if (introducido) {
             System.out.println("El trabajador ha sido contratado por la empresa");
         } else {
@@ -137,9 +120,9 @@ public class EmpresaArrayList {
     }
 
     public void consultaPorDepartamento(String dpto) {
-        for (int i = 0; i < trabajadores.length; i++) {
-            if (trabajadores[i] != null && trabajadores[i].departamento.equalsIgnoreCase(dpto)) {
-                System.out.println(trabajadores[i]);
+        for (int i = 0; i < trabajadores.size(); i++) {
+            if (trabajadores.get(i).departamento.equalsIgnoreCase(dpto)) {
+                System.out.println(trabajadores.get(i));
             }
         }
     }
@@ -148,25 +131,25 @@ public class EmpresaArrayList {
     public void actualizarSalario(String NIF) {
         Scanner lector = new Scanner(System.in);
 
-        for (int i = 0; i < trabajadores.length; i++) {
-            if (trabajadores[i] != null && trabajadores[i].NIF.equalsIgnoreCase(NIF)) {
-                System.out.println(trabajadores[i]);
+        for (int i = 0; i < trabajadores.size(); i++) {
+            if (trabajadores.get(i).NIF.equalsIgnoreCase(NIF)) {
+                System.out.println(trabajadores.get(i));
                 System.out.println("Introduce el salario nuevo");
-                //trabajadores[i].setSueldoBase(lector.nextDouble());
-                trabajadores[i].sueldoBase = lector.nextDouble();
+                //trabajadores.get(i).setSueldoBase(lector.nextDouble());
+                trabajadores.get(i).sueldoBase = lector.nextDouble();
             }
         }
     }
 
     public boolean actualizarPersonas(String nombre, int personas) {
         boolean todoOk = false;
-        for (int i = 0; i < trabajadores.length && !todoOk; i++) {
-            /*if (trabajadores[i] != null && trabajadores[i] instanceof JefeProyecto && trabajadores[i].nombre.equalsIgnoreCase(nombre)) {
-                ((JefeProyecto) trabajadores[i]).personas = personas;
+        for (int i = 0; i < trabajadores.size() && !todoOk; i++) {
+            /*if (trabajadores.get(i) instanceof JefeProyecto && trabajadores.get(i).nombre.equalsIgnoreCase(nombre)) {
+                ((JefeProyecto) trabajadores.get(i)).personas = personas;
                 todoOk = true;
             }*/
-            if (trabajadores[i] != null && trabajadores[i].getClass().getSimpleName().equals("JefeProyecto") && trabajadores[i].nombre.equalsIgnoreCase(nombre)) {
-                ((JefeProyecto) trabajadores[i]).personas = personas;
+            if (trabajadores.get(i).getClass().getSimpleName().equals("JefeProyecto") && trabajadores.get(i).nombre.equalsIgnoreCase(nombre)) {
+                ((JefeProyecto) trabajadores.get(i)).personas = personas;
                 todoOk = true;
             }
         }
@@ -177,15 +160,13 @@ public class EmpresaArrayList {
         Scanner lector = new Scanner(System.in);
         String nombre, departamento;
         boolean eliminado = false;
-        for (int i = 0; i < trabajadores.length && !eliminado; i++) {
-            if (trabajadores[i] != null) {
-                System.out.println("Introduzca el nombre del trabajador y el departamento");
-                nombre = lector.nextLine();
-                departamento = lector.nextLine();
-                if (trabajadores[i].nombre.equalsIgnoreCase(nombre) && trabajadores[i].departamento.equalsIgnoreCase(departamento)) {
-                    trabajadores[i] = null;
-                    eliminado = true;
-                }
+        System.out.println("Introduzca el nombre del trabajador y el departamento");
+        nombre = lector.nextLine();
+        departamento = lector.nextLine();
+        for (int i = 0; i < trabajadores.size() && !eliminado; i++) {
+            if (trabajadores.get(i).nombre.equalsIgnoreCase(nombre) && trabajadores.get(i).departamento.equalsIgnoreCase(departamento)) {
+                trabajadores.remove(i);
+                eliminado = true;
             }
         }
         if (eliminado) {
@@ -193,13 +174,14 @@ public class EmpresaArrayList {
         }
     }
 
-    public void calcularSalario(String dpto) {
+
+public void calcularSalario(String dpto) {
         double salarioDpto = 0;
-        for (int i = 0; i < trabajadores.length; i++) {
-            if (trabajadores[i] != null && trabajadores[i].departamento.equals(dpto)) {
-                System.out.printf("%s gana %.2f €\n", trabajadores[i].nombre, trabajadores[i].calcularSalario());
-                // salarioDpto+=trabajadores[i].calcularSalario();
-                salarioDpto = salarioDpto + trabajadores[i].calcularSalario();
+        for (int i = 0; i < trabajadores.size(); i++) {
+            if (trabajadores.get(i).departamento.equals(dpto)) {
+                System.out.printf("%s gana %.2f \n", trabajadores.get(i).nombre, trabajadores.get(i).calcularSalario());
+                // salarioDpto+=trabajadores.get(i).calcularSalario();
+                salarioDpto = salarioDpto + trabajadores.get(i).calcularSalario();
             }
         }
         System.out.printf("El salario total del dpto es %.2f €", salarioDpto);
@@ -210,11 +192,11 @@ public class EmpresaArrayList {
         boolean intercambio = true;
         while (intercambio) {
             intercambio = false;
-            for (int i = 0; i < trabajadores.length - 1; i++) {
-                if (trabajadores[i]!=null&&trabajadores[i+1]!=null&&trabajadores[i].sueldoBase < trabajadores[i + 1].sueldoBase) {
-                    aux = trabajadores[i];
-                    trabajadores[i] = trabajadores[i + 1];
-                    trabajadores[i + 1] = aux;
+            for (int i = 0; i < trabajadores.size() - 1; i++) {
+                if (trabajadores.get(i).sueldoBase < trabajadores.get(i + 1).sueldoBase) {
+                    aux = trabajadores.get(i);
+                    trabajadores.set(i,trabajadores.get(i + 1));
+                    trabajadores.set(i + 1, aux);
                     intercambio = true;
                 }
             }
@@ -222,42 +204,28 @@ public class EmpresaArrayList {
         }
 
     }
+
     public void ordenarCopia() {
-        int cont=0;
-        for (int i = 0; i < trabajadores.length; i++) {
-            if (trabajadores[i]!=null)
-                cont++;
-            
-        }
-        Trabajador[] copia = new Trabajador[cont];
-        Trabajador aux = null;
-        for (int i = 0,j=0; i < trabajadores.length; i++) {
-            if (trabajadores[i]!=null){
-                copia[j]=trabajadores[i];
-                j++;
-            }
-        }
-           
-        boolean intercambio = true;
-        while (intercambio) {
-            intercambio = false;
-            for (int i = 0; i < copia.length - 1; i++) {
-                if ((copia[i].departamento.compareTo(copia[i + 1].departamento))<0 ){
-                    aux = copia[i];
-                    copia[i] = copia[i + 1];
-                    copia[i + 1] = aux;
-                    intercambio = true;
-                }
-            }
+
+        ArrayList<Trabajador> copia = new ArrayList(trabajadores);
+        
+        System.out.println("Orden natural");
+        Collections.sort(copia);
+        for (int i = 0; i < copia.size(); i++) {
+            System.out.println(copia.get(i));
 
         }
-        for (int i = 0; i < copia.length; i++) {
-            System.out.println(copia[i]);
-            
+        
+        System.out.println("Por Departamento");
+         Collections.sort(copia, new porDepartamento());
+        for (int i = 0; i < copia.size(); i++) {
+            System.out.println(copia.get(i));
+
         }
     }
+
     @Override
-    public String toString() {
+public String toString() {
         return "Empresa{" + "trabajadores=" + trabajadores + '}';
     }
 

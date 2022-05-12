@@ -29,7 +29,7 @@ public abstract class Trabajador implements Serializable,Comparable<Trabajador>{
         NIF = Trabajador.contNIF+String.valueOf((char)((int)(Math.random()*26)+65));*/
 
         this.nombre = "Trabajador"+NIF;
-        this.departamento = "dpto";
+        this.departamento = "dpto"+ (int)(Math.random()*3);
         this.fecha = new Fecha();
         //el salario para los hijos pues son diferentes random
     }

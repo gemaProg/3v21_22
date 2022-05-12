@@ -22,9 +22,9 @@ public class Tester {
         //Faltaría hacer el menú
         Scanner lector= new Scanner(System.in);
         GestorFicheros.crearFicheros();
-        Empresa empresa = new Empresa(5);
+        EmpresaArrayList empresa = new EmpresaArrayList();
         empresa.listarTrabajadores();
-        GestorFicheros.escribirFicheroPW(GestorFicheros.FICHERO_TRABAJADORES, empresa.trabajadores);
+        /*GestorFicheros.escribirFicheroPW(GestorFicheros.FICHERO_TRABAJADORES, empresa.trabajadores);
         System.out.println("-------------------------------------");
         GestorFicheros.leerFicheroEscaner(GestorFicheros.FICHERO_TRABAJADORES);
         
@@ -34,7 +34,7 @@ public class Tester {
         Trabajador [] grupo=GestorFicheros.leerFicheroBinario(GestorFicheros.FICHERO_BINARIO_TRABAJADORES);
         System.out.println(Arrays.toString(grupo));
         System.out.println(grupo.length);
-        /*
+        
         
         GestorFicheros.escribirFicheroBinarioUnoPorUno(GestorFicheros.FICHERO_BINARIO_TRABAJADORES, empresa.trabajadores);
         System.out.println("-------------------------------------");
@@ -43,6 +43,7 @@ public class Tester {
         System.out.println(Arrays.toString(grupo2));
         System.out.println(grupo2.length);
        */
+        empresa.ordenarCopia();
        }
 
 }
