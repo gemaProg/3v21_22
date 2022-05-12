@@ -1,3 +1,12 @@
-Programador;TESTER;1H;IT2;05/10/2038;1266.8954930621069;true;JAVA:PHYTON
-Programador;TESTER;2Q;IT3;29/02/1956;1320.387851169574;true;JAVA:PHYTON
-JefeProyecto;TESTER_JEFE;3R;dpto;02/04/1969;1592.4125551838524;20
+Programador;Trabajador1T;1T;dpto0;28/02/1955;1360.4805211209875;true;Java:C##
+Programador;Trabajador2O;2O;dpto1;14/01/2033;1005.4048478125306;true;Java:C##
+Programador;Trabajador3N;3N;dpto1;03/10/1994;1345.3249770253428;true;Java:C##
+Programador;Trabajador4R;4R;dpto2;03/04/1996;1014.9063293511689;true;Java:C##
+Programador;Trabajador5C;5C;dpto2;27/09/2045;1250.3965324453625;true;Java:C##
+Programador;Trabajador6E;6E;dpto0;02/02/1979;1466.3594749782874;true;Java:C##
+JefeProyecto;Trabajador7I;7I;dpto0;09/09/1977;1655.36459898496;10
+JefeProyecto;Trabajador8O;8O;dpto1;29/02/2032;1957.356995784225;46
+JefeProyecto;Trabajador9M;9M;dpto2;03/11/1975;1742.5039675528003;2
+JefeProyecto;Trabajador10K;10K;dpto2;06/12/2014;1501.7692969166214;39
+JefeProyecto;Trabajador11Q;11Q;dpto0;10/12/2039;2000.0792416275704;16
+JefeProyecto;Trabajador12X;12X;dpto1;09/06/2001;1733.0945392704973;32

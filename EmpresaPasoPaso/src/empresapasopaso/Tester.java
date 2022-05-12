@@ -24,8 +24,8 @@ public class Tester {
         GestorFicheros.crearFicheros();
         EmpresaArrayList empresa = new EmpresaArrayList();
         empresa.listarTrabajadores();
-        /*GestorFicheros.escribirFicheroPW(GestorFicheros.FICHERO_TRABAJADORES, empresa.trabajadores);
-        System.out.println("-------------------------------------");
+        GestorFicherosArraylist.escribirFicheroPW(GestorFicheros.FICHERO_TRABAJADORES, empresa.trabajadores);
+        /*System.out.println("-------------------------------------");
         GestorFicheros.leerFicheroEscaner(GestorFicheros.FICHERO_TRABAJADORES);
         
         GestorFicheros.escribirFicheroBinario(GestorFicheros.FICHERO_BINARIO_TRABAJADORES, empresa.trabajadores);

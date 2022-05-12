@@ -5,12 +5,11 @@
  */
 package empresapasopaso;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
+import java.io.File;
 import java.util.ArrayList;
-import java.util.Arrays;
+
 import java.util.Collections;
-import java.util.Iterator;
+
 import java.util.Scanner;
 import java.util.TreeSet;
 
@@ -23,13 +22,17 @@ public class EmpresaArrayList {
     protected ArrayList<Trabajador> trabajadores;
 
     public EmpresaArrayList() {
-       
-        trabajadores = new ArrayList();
-        for (int i = 0; i < 12; i++) {
-            if (i < 6) {
-                trabajadores.add(new Programador());
-            } else {
-                trabajadores.add(new JefeProyecto());
+        File f = new File(GestorFicherosArraylist.FICHERO_TRABAJADORES);
+        if (f.exists()) {
+            trabajadores = GestorFicherosArraylist.leerFicheroEscaner(GestorFicherosArraylist.FICHERO_TRABAJADORES);
+        } else {
+            trabajadores = new ArrayList();
+            for (int i = 0; i < 12; i++) {
+                if (i < 6) {
+                    trabajadores.add(new Programador());
+                } else {
+                    trabajadores.add(new JefeProyecto());
+                }
             }
         }
 
@@ -175,8 +178,7 @@ public class EmpresaArrayList {
         }
     }
 
-
-public void calcularSalario(String dpto) {
+    public void calcularSalario(String dpto) {
         double salarioDpto = 0;
         for (int i = 0; i < trabajadores.size(); i++) {
             if (trabajadores.get(i).departamento.equals(dpto)) {
@@ -196,7 +198,7 @@ public void calcularSalario(String dpto) {
             for (int i = 0; i < trabajadores.size() - 1; i++) {
                 if (trabajadores.get(i).sueldoBase < trabajadores.get(i + 1).sueldoBase) {
                     aux = trabajadores.get(i);
-                    trabajadores.set(i,trabajadores.get(i + 1));
+                    trabajadores.set(i, trabajadores.get(i + 1));
                     trabajadores.set(i + 1, aux);
                     intercambio = true;
                 }
@@ -209,34 +211,47 @@ public void calcularSalario(String dpto) {
     public void ordenarCopia() {
 
         ArrayList<Trabajador> copia = new ArrayList(trabajadores);
-        
+
         System.out.println("Orden natural");
-        
+
         Collections.sort(copia);
-        
+
         for (int i = 0; i < copia.size(); i++) {
             System.out.println(copia.get(i));
 
         }
-        
+
         /*TreeSet<Trabajador> copiaT = new TreeSet(trabajadores);
         Iterator<Trabajador> it = trabajadores.iterator();
         while(it.hasNext())
             System.out.println(it.next());
         
-        */
+         */
         System.out.println("Por Departamento");
         Collections.sort(copia, new porDepartamento());
-       //Collections.sort(copia, new porGente());
-        
+        //Collections.sort(copia, new porGente());
+
         for (int i = 0; i < copia.size(); i++) {
             System.out.println(copia.get(i));
-
         }
+        System.out.println("Ordenando los jefes de proyecto");
+        ArrayList<JefeProyecto> jps = new ArrayList();
+        System.out.println(trabajadores.size());
+        for (int i = 0; i < trabajadores.size(); i++) {
+            if (trabajadores.get(i) instanceof JefeProyecto) {
+                jps.add((JefeProyecto) trabajadores.get(i));
+            }
+        }
+        Collections.sort(jps, new porGente());
+        //Collections.reverse(jps);
+        for (int i = jps.size() - 1; i >= 0; i--) {
+            System.out.println(jps.get(i));
+        }
+
     }
 
     @Override
-public String toString() {
+    public String toString() {
         return "Empresa{" + "trabajadores=" + trabajadores + '}';
     }
 

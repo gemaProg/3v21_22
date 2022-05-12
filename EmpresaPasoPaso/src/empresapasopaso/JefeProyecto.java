@@ -14,7 +14,7 @@ public class JefeProyecto extends Trabajador {
 
     public JefeProyecto() {
         super();
-        this.personas= 5;
+        this.personas= (int)(Math.random()*50);
         sueldoBase= Math.random()*501+1500;
     }
 

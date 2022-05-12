@@ -18,10 +18,10 @@ class porDepartamento implements Comparator<Trabajador>{
 
     @Override
     public int compare(Trabajador arg0, Trabajador arg1) {
-       return arg0.departamento.compareTo(arg1.departamento);
+        return arg0.departamento.compareTo(arg1.departamento);
     }
 
-
+   
 }
 
 class porSueldo implements Comparator<Trabajador>{
