@@ -28,8 +28,21 @@ class porSueldo implements Comparator<Trabajador>{
 
     @Override
     public int compare(Trabajador arg0, Trabajador arg1) {
-       return Double.compare(arg0.sueldoBase, arg1.sueldoBase);
+       //return Double.compare(arg0.sueldoBase, arg1.sueldoBase);
+       return (int)(arg0.sueldoBase-arg1.sueldoBase);
     }
 
 
 }
+class porGente implements Comparator<JefeProyecto>{
+
+    @Override
+    public int compare(JefeProyecto arg0, JefeProyecto arg1) {
+       return arg0.personas-arg1.personas;
+    }
+
+
+    
+}
+
+  

@@ -10,7 +10,9 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.Scanner;
+import java.util.TreeSet;
 
 /**
  *
@@ -23,8 +25,7 @@ public class EmpresaArrayList {
     public EmpresaArrayList() {
        
         trabajadores = new ArrayList();
-        for (int i = 2; i < 12; i++) {
-
+        for (int i = 0; i < 12; i++) {
             if (i < 6) {
                 trabajadores.add(new Programador());
             } else {
@@ -114,7 +115,7 @@ public class EmpresaArrayList {
         if (introducido) {
             System.out.println("El trabajador ha sido contratado por la empresa");
         } else {
-            System.out.println("No hay sitio");
+            System.out.println("Esta vez no ha podido ser.");
         }
 
     }
@@ -210,14 +211,24 @@ public void calcularSalario(String dpto) {
         ArrayList<Trabajador> copia = new ArrayList(trabajadores);
         
         System.out.println("Orden natural");
+        
         Collections.sort(copia);
+        
         for (int i = 0; i < copia.size(); i++) {
             System.out.println(copia.get(i));
 
         }
         
+        /*TreeSet<Trabajador> copiaT = new TreeSet(trabajadores);
+        Iterator<Trabajador> it = trabajadores.iterator();
+        while(it.hasNext())
+            System.out.println(it.next());
+        
+        */
         System.out.println("Por Departamento");
-         Collections.sort(copia, new porDepartamento());
+        Collections.sort(copia, new porDepartamento());
+       //Collections.sort(copia, new porGente());
+        
         for (int i = 0; i < copia.size(); i++) {
             System.out.println(copia.get(i));
 
