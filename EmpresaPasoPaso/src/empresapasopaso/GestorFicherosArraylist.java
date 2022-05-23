@@ -48,7 +48,7 @@ public class GestorFicherosArraylist {
     }
 
     public static void escribirFicheroPW(String fichero, ArrayList<Trabajador> lista) {
-        Scanner lector = new Scanner(System.in);
+      
         try {
             PrintWriter pw = new PrintWriter(fichero);
             for (int i = 0; i < lista.size(); i++) {

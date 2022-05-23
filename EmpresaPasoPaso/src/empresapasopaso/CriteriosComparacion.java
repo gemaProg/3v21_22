@@ -24,6 +24,19 @@ class porDepartamento implements Comparator<Trabajador>{
    
 }
 
+class porDepartamentoporSueldo implements Comparator<Trabajador>{
+
+    @Override
+    public int compare(Trabajador arg0, Trabajador arg1) {
+        int aux = arg0.departamento.compareTo(arg1.departamento);
+        if (aux == 0) //departamentos iguales
+            //aux = Double.compare(arg0.sueldoBase, arg1.sueldoBase);
+            aux = (int)(arg1.sueldoBase-arg0.sueldoBase);
+        return aux;
+    }
+
+   
+}
 class porSueldo implements Comparator<Trabajador>{
 
     @Override
@@ -38,9 +51,10 @@ class porGente implements Comparator<JefeProyecto>{
 
     @Override
     public int compare(JefeProyecto arg0, JefeProyecto arg1) {
-       return arg0.personas-arg1.personas;
+    return arg0.personas-arg1.personas;
     }
 
+   
 
     
 }

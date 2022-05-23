@@ -20,8 +20,8 @@ public class Tester {
     public static void main(String[] args) {
         // TODO code application logic here
         //Faltaría hacer el menú
-        Scanner lector= new Scanner(System.in);
-        GestorFicheros.crearFicheros();
+       
+        //GestorFicheros.crearFicheros();
         EmpresaArrayList empresa = new EmpresaArrayList();
         empresa.listarTrabajadores();
         GestorFicherosArraylist.escribirFicheroPW(GestorFicheros.FICHERO_TRABAJADORES, empresa.trabajadores);

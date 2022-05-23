@@ -212,7 +212,7 @@ public class EmpresaArrayList {
 
         ArrayList<Trabajador> copia = new ArrayList(trabajadores);
 
-        System.out.println("Orden natural");
+        /*System.out.println("Orden natural");
 
         Collections.sort(copia);
 
@@ -227,13 +227,17 @@ public class EmpresaArrayList {
             System.out.println(it.next());
         
          */
-        System.out.println("Por Departamento");
-        Collections.sort(copia, new porDepartamento());
+        
+        System.out.println("--------------doble criterio");
+        System.out.println("Por Departamentopor Sueldo");
+        Collections.sort(copia, new porDepartamentoporSueldo());
         //Collections.sort(copia, new porGente());
 
         for (int i = 0; i < copia.size(); i++) {
             System.out.println(copia.get(i));
         }
+        System.out.println("--------------ordenando  jefes");
+        
         System.out.println("Ordenando los jefes de proyecto");
         ArrayList<JefeProyecto> jps = new ArrayList();
         System.out.println(trabajadores.size());
