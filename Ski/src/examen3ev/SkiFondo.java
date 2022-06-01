@@ -31,7 +31,15 @@ public class SkiFondo extends Pista {
         pueblos.add("Huesca");
         pueblos.add("Zaragoza");
     }
-
+    
+    public SkiFondo(String id, String nombre, String provincia, String km, String pueblos){
+        super(id,nombre,provincia,km);
+        String trozos [] = pueblos.split(";");
+        for (int i = 0; i < trozos.length; i++) {
+           this.pueblos.add(trozos[i]);
+        }
+    
+    }
     public SkiFondo(ArrayList<String> pueblos) {
         this.pueblos = pueblos;
     }

@@ -9,16 +9,16 @@ package examen3ev;
  *
  * @author prog
  */
-public class SkiAlphino extends Pista {
+public class SkiAlpino extends Pista {
     protected static final String []dificultades={"Verde","Azul","Roja"};
     protected String dificultad;
 
-    public SkiAlphino(int id, String nombre, String provincia, double km, String dificultad) {
+    public SkiAlpino(int id, String nombre, String provincia, double km, String dificultad){
         super(id, nombre, provincia, km);
         this.dificultad = dificultad;
     }
 
-    public SkiAlphino(){
+    public SkiAlpino(){
         super();
         this.dificultad="Verde";
     }    
@@ -27,7 +27,8 @@ public class SkiAlphino extends Pista {
         return dificultad;
     }
 
-    public void setDificultad(String dificultad) {
+    public void setDificultad(String dificultad) throws ExcepcionDificultad {
+        compruebaDificultad(dificultad);
         this.dificultad = dificultad;
     }
 

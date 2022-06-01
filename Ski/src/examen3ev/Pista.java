@@ -23,7 +23,14 @@ public class Pista implements Serializable, Comparable<Pista>{
         this.provincia = provincia;
         this.km = km;
     }
-    
+    public Pista(String id, String nombre, String provincia, String km) {
+        this(Integer.parseInt(id), nombre,provincia,Double.parseDouble(km));
+        /*this.id = Integer.parseInt(id);
+        this.nombre = nombre;
+        this.provincia = provincia;
+        this.km = Double.parseDouble(km);*/
+    }
+
     public Pista(){
         this.id = 0;
         this.nombre = "Pista";
@@ -69,7 +76,7 @@ public class Pista implements Serializable, Comparable<Pista>{
     public String toString() {
         return getClass().getSimpleName()+ "id=" + id + ", nombre=" + nombre + ", provincia=" + provincia + ", km=" + km + '}';
     }
-    public String toStringFichero(){
+    public String toStringFichero(){//PON EL SEPARADOR QUE QUIERAS, OJO EVITAR . Y , (DECIMALES)
         return getClass().getSimpleName()+"/"+id+"/"+nombre+"/"+provincia+"/"+km;
     }
 

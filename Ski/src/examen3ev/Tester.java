@@ -23,56 +23,32 @@ public class Tester {
         // TODO code application logic here
         Scanner sc=new Scanner(System.in);
         GestorPistas pistas=new GestorPistas();
-        //GestionFicheros.escribirFichero(pista.pistas);
+        GestionFicheros.crearFicheros();
+        GestionFicheros.escribirFichero(pistas.pistas);
         //GestionFicheros.escribirFicheroBinario(pista.pistas);
         /*pista.pistas=GestionFicheros.leerFichero();
         pista.pistas=GestionFicheros.leerFicheroBinario();*/
         pistas.listarPistas();
-        try {
+        pistas.pistas=GestionFicheros.leerFichero(); //Este es el método para sustituir las pistas de la RAM por el contenido del fichero de texto
+        /*try {
             pistas.consultarKm();
-            //pistas.añadirPueblo();
+            pistas.añadirPueblo();
+            pistas.añadirPista();
+        
+            System.out.println("..................");
+            pistas.ordenarProvinciaKm();
+            System.out.println("..................");
+            pistas.ordenarDificultadKm();
+            System.out.println("..................");
+            
             pistas.sinDuplicadas();
-            /*
-            int opcion;
-            System.out.println("Bienvenido a nuestra empresa de pistas de ski.");
             
             
-            do{
-            System.out.println("Elija la opciÃ³n que desea realizar."
-            + "\n 1. Añadir una pista."
-            + "\n 2. Consultar km de extensiÃ³n de pistas que tiene una provincia."
-            + "\n 3. Añadir pueblo a la ruta de una pista de SkiFondo."
-            + "\n 4. Eliminar una pista de SkiAlphino."
-            + "\n 5. Listar pistas sin duplicar."
-            + "\n 6. Listar pistas."
-            + "\n 7. Salir del menÃº.");
-            opcion=sc.nextInt();
-            
-            switch(opcion){
-            case 1:
-            pista.añadirPista();
-            break;
-            case 2:
-            pista.consultarKm();
-            break;
-            case 3:
-            pista.añadirPueblo();
-            break;
-            case 4:
-            pista.eliminarPista();
-            break;
-            case 5:
-            pista.sinDuplicadas();
-            break;
-            case 6:
-            pista.listarPistas();
-            break;
-            }
-            }while(opcion<7);*/
         } catch (IOException ex) {
             Logger.getLogger(Tester.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        }
+        }*/
+       }
     }
+    
     
 
